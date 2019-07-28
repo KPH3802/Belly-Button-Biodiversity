@@ -102,3 +102,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# ignore DS_Store files
+.DS_Store
+
+
