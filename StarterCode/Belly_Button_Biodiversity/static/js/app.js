@@ -95,7 +95,7 @@ function buildMetadata(sample) {
 
       Plotly.newPlot('guage', data, layout);
 
-    })
+    });
 
 }
 
@@ -145,7 +145,7 @@ function buildCharts(sample) {
         values: size.slice(0, 10),
         labels: values.slice(0, 10),
         type: 'pie',
-        text: [labels]
+        text: ['labels']
       };
 
       var PieData = [PieChartData];
@@ -157,7 +157,7 @@ function buildCharts(sample) {
 
       Plotly.newPlot("pie", PieData, pielayout);
 
-    })
+    });
 }
 
 function init() {
