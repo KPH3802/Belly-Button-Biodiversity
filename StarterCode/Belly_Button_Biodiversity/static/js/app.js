@@ -131,7 +131,7 @@ function buildCharts(sample) {
       // Create a layout for the bubble chart
       var bubbleChartLayout = {
         xaxis: { 'title': 'OTU IDS', range: [0, 3500] },
-        yaxis: { range: [0, 200] }
+        yaxis: { range: [0, 225] }
       };
 
       // build the bubble chart
