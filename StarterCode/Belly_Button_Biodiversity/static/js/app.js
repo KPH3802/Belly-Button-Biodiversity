@@ -90,7 +90,7 @@ function buildMetadata(sample) {
         }],
         title: '<b>Belly Button Washing Frequency</b> <br> Scrubs per Week',
         height: 600,
-        width: 750,
+        width: 600,
         xaxis: {
           zeroline: false,
           showticklabels: false,
