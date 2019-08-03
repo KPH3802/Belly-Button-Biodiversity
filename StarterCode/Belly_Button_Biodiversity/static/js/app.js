@@ -27,73 +27,85 @@ function buildMetadata(sample) {
       // BONUS: Build the Gauge Chart, uncomment when ready to test
       // buildGauge(response.WFREQ);
 
-//       // Trig to calc meter point
-      // var degrees = 180 - (response.WFREQ * 20),
-      //   radius = .5;
-      // var radians = degrees * Math.PI / 180;
-      // var x = radius * Math.cos(radians);
-      // var y = radius * Math.sin(radians);
+      // Trig to calc meter point
+      var degrees = 180 - (response.WFREQ * 20),
+        radius = .5;
+      var radians = degrees * Math.PI / 180;
+      var x = radius * Math.cos(radians);
+      var y = radius * Math.sin(radians);
 
-      // // Path: may have to change to create a better triangle
-      // var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
-      //   pathX = String(x),
-      //   space = ' ',
-      //   pathY = String(y),
-      //   pathEnd = ' Z';
-      // var path = mainPath.concat(pathX, space, pathY, pathEnd);
+      console.log('response :', response.WFREQ);
+      console.log('degrees :', degrees);
 
-      // var data = [{
-      //   type: 'scatter',
-      //   x: [0], y: [0],
-      //   marker: { size: 28, color: '850000' },
-      //   showlegend: false,
-      //   name: 'speed',
-      //   // text: level,
-      //   // hoverinfo: 'text+name'
-      // },
-      // {
-      //   values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
-      //   rotation: 90,
-      //   text: ['8-9', '7-8', '6-7', '5-6',
-      //     '4-5', '3-4', '2-3', '1-2','0-1',''],
-      //   textinfo: 'text',
-      //   textposition: 'inside',
-      //   marker: {
-      //     colors: ['rgba(14, 127, 0, .5)', 'rgba(110, 154, 22, .5)',
-      //       'rgba(170, 202, 42, .5)', 'rgba(202, 209, 95, .5)',
-      //       'rgba(210, 206, 145, .5)', 'rgba(232, 226, 202, .5)',
-      //       'rgba(255, 255, 255, 0)']
-      //   },
-      //   labels: ['151-180', '121-150', '91-120', '61-90', '31-60', '0-30', ''],
-      //   hoverinfo: 'label',
-      //   hole: .5,
-      //   type: 'pie',
-      //   showlegend: false
-      // }];
+      // Path: may have to change to create a better triangle
+      var mainPath = 'M -.0 -0.05 L .0 0.05 L ',
+        pathX = String(x),
+        space = ' ',
+        pathY = String(y),
+        pathEnd = ' Z';
+      var path = mainPath.concat(pathX, space, pathY, pathEnd);
 
-      // var layout = {
-      //   shapes: [{
-      //     type: 'path',
-      //     path: path,
-      //     fillcolor: '850000',
-      //     line: {
-      //       color: '850000'
-      //     }
-      //   }],
-      //   title: '<b>Belly Button Washing Frequency</b> <br> Scrubs per Week',
-      //   height: 1000,
-      //   width: 1000,
-      //   xaxis: {
-      //     zeroline: false, showticklabels: false,
-      //     showgrid: false, range: [-1, 1]
-      //   },
-      //   yaxis: {
-      //     zeroline: false, showticklabels: false,
-      //     showgrid: false, range: [-1, 1]
-      //   }
-      // };
+      var data = [{
+        type: 'scatter',
+        x: [0], y: [0],
+        marker: { size: 28, color: '850000' },
+        showlegend: false,
+        name: 'Washes',
+        text: response.WFREQ,
+        hoverinfo: 'text+name'
+      },
+      {
+        values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
+        rotation: 90,
+        text: ['8-9', '7-8',
+          '6-7', '5-6',
+          '4-5', '3-4',
+          '2-3', '1-2',
+          '0-1', ''],
+        textinfo: 'text',
+        textposition: 'inside',
+        marker: {
+          colors: ['#193300', '#336600',
+            '#4C9900', '#66CC00',
+            '#80FF00', '#99FF33',
+            '#B2FF66', '#CCFF99',
+            '#CCFFCC', '#FFFFFF']
+        },
+        labels: ['8-9', '7-8', '6-7', '5-6',
+          '4-5', '3-4', '2-3', '1-2', '0-1', ''],
+        hoverinfo: 'label',
+        hole: .5,
+        type: 'pie',
+        showlegend: false
+      }];
 
-      // Plotly.newPlot('guage', data, layout);
+      var layout = {
+        shapes: [{
+          type: 'path',
+          path: path,
+          fillcolor: '850000',
+          line: {
+            color: '850000'
+          }
+        }],
+        title: '<b>Belly Button Washing Frequency</b> <br> Scrubs per Week',
+        height: 600,
+        width: 750,
+        xaxis: {
+          zeroline: false,
+          showticklabels: false,
+          showgrid: false,
+          range: [-1, 1]
+        },
+        yaxis: {
+          zeroline: false,
+          showticklabels: false,
+          showgrid: false,
+          range: [-1, 1]
+        }
+      };
+
+      Plotly.newPlot('gauge', data, layout);
 
     });
 
@@ -108,20 +120,20 @@ function buildCharts(sample) {
       // @TODO: Build a Bubble Chart using the sample data
       console.log('[buildCharts] response:', response);
       // Grab our 3 lists of information separately
-      var labels = response['otu_labels'];
-      var values = response['otu_ids'];
-      var size = response['sample_values'];
+      var otu_labels = response.otu_labels;
+      var otu_ids = response.otu_ids;
+      var sample_values = response.sample_values;
 
       // Create a 'payload' to feed to the chart function
       var bubbleChartData =
       {
-        'x': values,
-        'y': size,
-        hovertext: labels,
+        'x': otu_ids,
+        'y': sample_values,
+        hovertext: otu_labels,
         'mode': 'markers',
         'marker': {
-          size: size,
-          color: values
+          size: sample_values,
+          color: otu_ids
         }
       };
 
@@ -130,8 +142,18 @@ function buildCharts(sample) {
 
       // Create a layout for the bubble chart
       var bubbleChartLayout = {
-        xaxis: { 'title': 'OTU IDS', range: [0, 3500] },
-        yaxis: { range: [0, 200] }
+        autosize: true,
+        xaxis: {
+          'title': 'OTU IDS',
+          // range: [-9, 3500],
+
+          // automargin: true
+        },
+        // yaxis: {
+        //   range: [0, 249],
+        //   zeroline: false,
+        //   // automargin: true
+        // }
       };
 
       // build the bubble chart
@@ -142,9 +164,9 @@ function buildCharts(sample) {
       // otu_ids, and labels (10 each).
 
       var PieChartData = {
-        values: size.sort().slice(0, 10),
-        labels: values.sort().slice(0, 10),
-        'hovertext': labels,
+        values: sample_values.slice(0, 10),
+        labels: otu_ids.slice(0, 10),
+        'hovertext': otu_labels.slice(0, 10),
         type: 'pie'
       };
 
