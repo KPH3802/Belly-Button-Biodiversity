@@ -7,3 +7,7 @@ https://belly-button-kph.herokuapp.com/
 
 
 ![bacteria_by_filterforgedotcom.jpg](Images/bacteria_by_filterforgedotcom.jpg)
+
+
+![pie_chart.png](Images/pie_chart.png)
+
